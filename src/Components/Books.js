@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import Book from './Book'
-import { Table } from "react-bootstrap"
+import {  Table } from "react-bootstrap"
+import Modal from  './modal'
 function Books() {
   const [books, setBooks] = useState([{
     name: "lalala",
@@ -33,6 +34,7 @@ function Books() {
 
       </tbody>
     </Table>
+    //<Modal></Modal>
 
   )
 }

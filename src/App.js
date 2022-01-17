@@ -6,6 +6,9 @@ import Header from './Components/Header';
 import SignUp from './Components/signUp/signUp.component';
 import FirstPage from './Components/FirstPage';
 import Filters from './Components/Filters'
+import AddNewAd from './Components/addNewAd';
+import Manager from './Components/manager';
+//import DropdownFilterCell from './Components/filters1';
 //import dashboard from './Components/dashboard';
 //import Preferences from './Components/Preferences';
 function App() {
@@ -19,8 +22,14 @@ function App() {
           <Route path="/signIn">
             <SignIn></SignIn>
           </Route>
+          <Route path="/Manager">
+            <Manager></Manager>
+          </Route>
           <Route path="/signUp">
             <SignUp></SignUp>
+          </Route>
+          <Route path="/AddNewAd">
+            <AddNewAd></AddNewAd>
           </Route>
           <Route>
           <Route path="/filters">
@@ -32,7 +41,8 @@ function App() {
           </Route>
         </Switch>
       </Router>
-      {/* <FirstPage></FirstPage> */}
+
+       <FirstPage></FirstPage>
     </>
 
   );

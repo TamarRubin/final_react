@@ -1,6 +1,9 @@
+import Modal1 from './modal';
 import React from 'react';
 import { Card, Button } from 'react-bootstrap';
-
+// const openModal=()=>{
+//   return <Modal></Modal>
+// }
 function Book({ book }) {
 
   return (
@@ -11,7 +14,7 @@ function Book({ book }) {
         <Card.Text>
           {book.publisher}.
         </Card.Text>
-        <Button variant="primary">Go somewhere</Button>
+        <Modal1></Modal1>
       </Card.Body>
     </Card>
   );

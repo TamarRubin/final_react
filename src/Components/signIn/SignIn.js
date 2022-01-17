@@ -2,10 +2,11 @@ import React,{useState} from 'react'
 import { Form, Button } from 'react-bootstrap'
 import{useHistory} from 'react-router-dom'
 import axios from 'axios';
+import Manager from '../manager';
 export default function SignIn() {
 const [email,setEmail] = useState();
 const [password,setPassword] = useState();
-const [name,setName] = useState()
+const [name,setName] = useState();
 const history = useHistory();
 const handleEvent=()=>{
   
@@ -13,9 +14,13 @@ const handleEvent=()=>{
         .then((res)=>{
             setName(res.data.name);
             console.log("res from sign in",res)
-            alert(name);
+            alert("hello " +res.data.name);
             if(res.status === 200){
-                history.push('/filters')
+                if(res.data.isManager === 0)
+                    history.push('/filters')
+                else
+                    history.push('/Manager')
+                
             }
         }); 
         //debugger
@@ -57,4 +62,5 @@ const handleEvent=()=>{
         </div>
 </div>
     );
-}
+        }
+

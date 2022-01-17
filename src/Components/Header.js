@@ -13,6 +13,9 @@ function Header() {
   function getSignUp() {
     history.push('signUp');
   }
+  function getAddNewAd() {
+    history.push('AddNewAd');
+  }
   return <div>
     {/* <SignIn />
     <SignUp /> */}
@@ -29,7 +32,7 @@ function Header() {
       הרשמה    </Button>
 
 
-    <Button type="button" onClick={getSignUp}>
+    <Button type="button" onClick={getAddNewAd}>
       +פרסום מודעה חדשה    </Button>
 
     {/* 
