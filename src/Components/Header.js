@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import { BrowserRouter, Redirect, useHistory } from 'react-router-dom';
 import SignIn from './signIn/SignIn';
 import SignUp from './signUp/signUp.component';
+const loggedInUser = localStorage.getItem("user");
 function Header() {
   const history = useHistory();
 
@@ -23,7 +24,7 @@ function Header() {
 {this.state.view === 1 ? <SignIn/> : ''}  */}
     {/* {/* 3 כפתורים: 1 sign in , sign up , פרסום מודעה חדשה */}
 
-
+{/* <h2>loggedInUser</h2> */}
     <Button type="button" onClick={getSignIn}>
       כניסה    </Button>
 

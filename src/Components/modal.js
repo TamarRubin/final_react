@@ -1,6 +1,25 @@
-import React from 'react';
+import React,{useState} from 'react';
+import axios from  'axios'
 import {  Button,Modal} from 'react-bootstrap';
 function MyVerticallyCenteredModal(props) {
+
+const [idAd,setIDad] = useState();
+const [userID,setIDuser] = useState();
+const [bookID,setIDbook] = useState();
+const [price,setPrice] = useState();
+  // axios.get("http://localhost:5000/getFirstOkAd")
+  // .then((res)=>{
+  //     setIDad(res.data.idAd);
+  //     console.log("res from sign in",res)
+     
+  //     debugger
+  //    // alert("hello " +res.data.id );
+      
+      
+  // }); 
+  //debugger
+
+
   return (
     <Modal
       {...props}

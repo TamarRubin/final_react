@@ -3,18 +3,23 @@ import { Form, Button } from 'react-bootstrap'
 import{useHistory} from 'react-router-dom'
 import axios from 'axios';
 import Manager from '../manager';
+//import localStorage from '../localStorege';
 export default function SignIn() {
 const [email,setEmail] = useState();
 const [password,setPassword] = useState();
 const [name,setName] = useState();
 const history = useHistory();
 const handleEvent=()=>{
-  
+    //var store = require('store')
+    
  axios.post("http://localhost:5000/getUserByPassword",{email:email,password:password})
         .then((res)=>{
             setName(res.data.name);
             console.log("res from sign in",res)
-            alert("hello " +res.data.name);
+            localStorage.setItem('user', JSON.stringify({ name:res.data.name,id:res.data.id  }))
+           // localStorage.set('user', { id:res.data.id })
+            debugger
+            alert("hello " +JSON.parse(localStorage.getItem('user')).name);
             if(res.status === 200){
                 if(res.data.isManager === 0)
                     history.push('/filters')
@@ -22,6 +27,7 @@ const handleEvent=()=>{
                     history.push('/Manager')
                 
             }
+            
         }); 
         //debugger
       
@@ -45,17 +51,9 @@ const handleEvent=()=>{
                 onChange={(e) => { setPassword(e.target.value) }}  />
             </div>
 
-            {/* <div className="form-group">
-                <div className="custom-control custom-checkbox">
-                    <input type="checkbox" className="custom-control-input" id="customCheck1" />
-                    <label className="custom-control-label" htmlFor="customCheck1">Remember me</label>
-                </div>
-            </div> */}
+        
 <input type="button" onClick={handleEvent} value="התחברות" className="btn btn-dark btn-lg btn-block"/>
-            {/* <button onClick={handleEvent}  className="btn btn-dark btn-lg btn-block">התחברות</button> */}
-            {/* <p className="forgot-password text-right">
-                Forgot <a href="#">password?</a>
-            </p> */}
+            
         </form>
         <div>
             <h1>name.body</h1>
