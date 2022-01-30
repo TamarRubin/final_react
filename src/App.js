@@ -8,6 +8,8 @@ import FirstPage from './Components/FirstPage';
 import Filters from './Components/Filters'
 import AddNewAd from './Components/addNewAd';
 import Manager from './Components/manager';
+import AddNewBook from './Components/addNewBook';
+import { AddPrice } from './Components/addPrice';
 //import DropdownFilterCell from './Components/filters1';
 //import dashboard from './Components/dashboard';
 //import Preferences from './Components/Preferences';
@@ -33,11 +35,17 @@ function App() {
           </Route>
           <Route>
           <Route path="/filters">
-           <Filters/>
+           <Filters />
           </Route>
           </Route>
           <Route path="/">
             <FirstPage></FirstPage>
+          </Route>
+          <Route path="/AddNewBook">
+            <AddNewBook></AddNewBook>
+          </Route>
+          <Route path="/addPrice/:bookName/:status ">
+            <AddPrice></AddPrice>
           </Route>
         </Switch>
       </Router>
