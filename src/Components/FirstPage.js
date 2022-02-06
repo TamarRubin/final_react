@@ -3,7 +3,7 @@ import { setState } from 'react';
 import { Link } from 'react-router-dom';
 import Header from './Header';
 // import Filters from './Filters';
-import Books from './Books';
+import Ads from './Ads';
 import SignUp from './signUp/signUp.component';
 import SignIn from './signIn/SignIn';
 
@@ -18,7 +18,7 @@ function FirstPage() {
       <SignIn/>
       < SignUp/> */}
     {/* <Filters /> */}
-    <Books />
+    <Ads />
   </div>;
 }
 
