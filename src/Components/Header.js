@@ -1,4 +1,5 @@
 import React from 'react';
+
 import Button from 'react-bootstrap/Button'
 import { Link } from 'react-router-dom';
 import { BrowserRouter, Redirect, useHistory } from 'react-router-dom';
@@ -17,15 +18,12 @@ function Header() {
   function getAddNewAd() {
     history.push('AddNewAd');
   }
+  function getFilters() {
+    history.push('Filters');
+  }
   return <div>
-    {/* <SignIn />
-    <SignUp /> */}
-    {/* <Button onClick={() => setState({view: 1})}>התחברות</Button>{' '}
-{this.state.view === 1 ? <SignIn/> : ''}  */}
-    {/* {/* 3 כפתורים: 1 sign in , sign up , פרסום מודעה חדשה */}
-
-{/* <h2>loggedInUser</h2> */}
-    <Button type="button" onClick={getSignIn}>
+    
+    <Button type="button" onClick={getSignIn} className='button'>
       כניסה    </Button>
 
 
@@ -36,14 +34,8 @@ function Header() {
     <Button type="button" onClick={getAddNewAd}>
       +פרסום מודעה חדשה    </Button>
 
-    {/* 
-    <Link to="/SignIn">
-      <button variant="dark">הרשמה
-      </button>
-    // </Link> */}
-    {/* // <Button variant="dark">הרשמה</Button>{' '}
-    // <Button variant="dark">התחברות</Button>{' '}
-    // <Button variant="dark">+ פרסום מודעה חדשה</Button>{' '}    */}
+      <Button type="button" onClick={getFilters}>
+       חיפוש ספר    </Button>
 
 
   </div>

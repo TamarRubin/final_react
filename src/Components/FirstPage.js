@@ -13,11 +13,6 @@ function FirstPage() {
   const greeting = 'Hello Function Component!';
   const signInLink = SignIn;
   return <div>
-
-    {/*         
-      <SignIn/>
-      < SignUp/> */}
-    {/* <Filters /> */}
     <Ads />
   </div>;
 }

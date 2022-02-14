@@ -22,7 +22,7 @@ function Ad ({ ad }) {
       <Card.Body>
         <Card.Title>{book?.name}</Card.Title>
         <Card.Text>{'sss'}.</Card.Text>
-        <Modal1></Modal1>
+        <Modal1 ad={ad} book={book}></Modal1>
       </Card.Body>
     </Card>
   )

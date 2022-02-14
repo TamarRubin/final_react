@@ -30,7 +30,7 @@ function AddNewAd () {
       console.log('res', res)
 
       if (res.data.length != 0) {
-        alert('find book: id= ' + bookId)
+        alert("הספר קיים במערכת")
         history.push(`/addPrice/${bookName}/${1}`)
       } else {
         history.push(`/AddNewBook/${bookName}`)

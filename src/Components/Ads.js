@@ -9,7 +9,7 @@ function Ads () {
     axios.get('http://localhost:5000/getAllOkAds').then(res => {
      
       for (var i = 0; i < res.data.length; i++) {
-       // debugger       
+       debugger       
         setAdsID(state =>[...state, res.data[i]])
       }
     })

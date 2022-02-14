@@ -10,6 +10,8 @@ import AddNewAd from './Components/addNewAd'
 import Manager from './Components/manager'
 import AddNewBook from './Components/addNewBook'
 import AddPrice from './Components/addPrice'
+import SignInSide from './LoginSide'
+import SignUpSide from './Components/signUp/signUp2'
 //import DropdownFilterCell from './Components/filters1';
 //import dashboard from './Components/dashboard';
 //import Preferences from './Components/Preferences';
@@ -19,15 +21,16 @@ function App () {
     <>
       <Router>
         <Header />
+        
         <Switch>
-          <Route path='/signIn'>
-            <SignIn></SignIn>
+        <Route path='/signIn'>
+        <SignInSide></SignInSide>
           </Route>
           <Route path='/Manager'>
             <Manager></Manager>
           </Route>
           <Route path='/signUp'>
-            <SignUp></SignUp>
+            <SignUpSide></SignUpSide>
           </Route>
           <Route path='/AddNewAd'>
             <AddNewAd></AddNewAd>
@@ -35,19 +38,20 @@ function App () {
           <Route path='/AddNewBook/:name'>
             <AddNewBook></AddNewBook>
           </Route>
-          <Route path='/filters'>
-            <Filters />
-          </Route>
+          
           <Route path='/addPrice/:bookName/:status'>
             <AddPrice />
           </Route>
-          <Route path='/'>
+          <Route path="/filters">
+           <Filters/>
+          </Route>
+          <Route exact path='/'>
             <FirstPage></FirstPage>
           </Route>
         </Switch>
       </Router>
+      
 
-    <FirstPage></FirstPage> 
     </>
   )
 }

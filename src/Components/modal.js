@@ -2,7 +2,7 @@ import React,{useState,useEffect} from 'react';
 import axios from  'axios'
 import {  Button,Modal} from 'react-bootstrap';
 function MyVerticallyCenteredModal(props) {
-
+debugger
 // const [okAds,setOkAds] = useState();
 // const [userID,setIDuser] = useState();
 // const [bookID,setIDbook] = useState();
@@ -48,7 +48,7 @@ function MyVerticallyCenteredModal(props) {
     >
       <Modal.Header >
         <Modal.Title id="contained-modal-title-vcenter">
-          {/* שם הספר: + {name}  */}
+          שם הספר:  {props.book.name}
         </Modal.Title>
       </Modal.Header>
       <Modal.Body>
@@ -67,12 +67,19 @@ function MyVerticallyCenteredModal(props) {
   );
 }
 
-function Modal1() {
+function Modal1({ad}) {
   const [modalShow, setModalShow] = React.useState(false);
-
+  const [book, setBook] = useState({ name: '' })
   useEffect(() => {
-
-  }, []);
+    //alert(id)
+    console.log('ad : ', ad)
+    axios.get(`http://localhost:5000/getBookById/${ad.bookID}`).then(res => {
+      debugger
+      console.log(res.data[0])
+      console.log(res.data[0].name)
+      setBook(res.data[0])
+    })
+  }, [])
   return (
     <div>
       <Button variant="primary" onClick={() => setModalShow(true)}>
@@ -80,6 +87,8 @@ function Modal1() {
       </Button>
 
       <MyVerticallyCenteredModal
+      ad ={ad}
+      book = {book}
         show={modalShow}
         onHide={() => setModalShow(false)}
       />
