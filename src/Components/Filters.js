@@ -12,7 +12,7 @@ function Filters() {
 
   useEffect(() => {
     debugger
-    axios.get("http://localhost:5000/getAllCities")
+    axios.get("http://localhost:5000/getAllcities")
       .then(res => {
         console.log(res.data);
         setcities(res.data);

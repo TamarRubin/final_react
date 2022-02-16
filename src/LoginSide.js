@@ -33,6 +33,8 @@ function Copyright(props) {
 const theme = createTheme();
 
 export default function SignInSide() {
+
+  const history = useHistory()
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
@@ -57,10 +59,10 @@ export default function SignInSide() {
         )
         
         alert('hello ' + JSON.parse(localStorage.getItem('user')).name)
-        // if (res.status === 200) {
-        //   if (res.data.isManager === 0) history.push('/filters')
-        //   else history.push('/Manager')
-        // }
+        if (res.status === 200) {
+          if (res.data.isManager === 0) history.push('/filters')
+          else history.push('/Manager')
+        }
       })
   };
 
