@@ -1,33 +1,33 @@
-import React,{useState} from 'react';
+import React,{useState,useEffect} from 'react';
 import axios from  'axios'
 import {  Button,Modal} from 'react-bootstrap';
 function MyVerticallyCenteredModal(props) {
+debugger
+// const [okAds,setOkAds] = useState();
+// const [userID,setIDuser] = useState();
+// const [bookID,setIDbook] = useState();
+// const [price,setPrice] = useState();
+//   axios.get("http://localhost:5000/getAllOkAds")
+//   .then((res)=>{
+//    // alert(res.data[0])
+//     debugger
+//       setOkAds(res.data);
+//       console.log("res from modal ",res)
+//       setIDuser(res.data[0].userID)
+//       setIDbook(res.data[0].bookID)
+//      // alert(res.data[0].bookID +": book id")
+//       setPrice(res.data[0].price)
+//       debugger
+//      // alert("hello " +res.data.id );     
+//   }); 
+//   debugger
 
-const [okAds,setOkAds] = useState();
-const [userID,setIDuser] = useState();
-const [bookID,setIDbook] = useState();
-const [price,setPrice] = useState();
-  // axios.get("http://localhost:5000/getAllOkAds")
-  // .then((res)=>{
-  //  // alert(res.data[0])
-  //   debugger
-  //     setOkAds(res.data);
-  //     console.log("res from modal ",res)
-  //     setIDuser(res.data[0].userID)
-  //     setIDbook(res.data[0].bookID)
-  //    // alert(res.data[0].bookID +": book id")
-  //     setPrice(res.data[0].price)
-  //     debugger
-     // alert("hello " +res.data.id );     
-  // }); 
-
-
-    const [name,setName] = useState();
-    const [writerName,setWriterName] = useState();
-    const [publishName,setPublishName] = useState();
-    const [category,setCategory] = useState();
-    const [isbn,setIsbn] = useState();
-    const [image,setImage] = useState();
+//     const [name,setName] = useState();
+//     const [writerName,setWriterName] = useState();
+//     const [publishName,setPublishName] = useState();
+//     const [category,setCategory] = useState();
+//     const [isbn,setIsbn] = useState();
+//     const [image,setImage] = useState();
 
 // axios.get(`http://localhost:5000/getBookById/:${bookID}`)
 //   .then((res)=>{
@@ -48,17 +48,17 @@ const [price,setPrice] = useState();
     >
       <Modal.Header >
         <Modal.Title id="contained-modal-title-vcenter">
-          שם הספר: + {name} 
+          שם הספר:  {props.book.name}
         </Modal.Title>
       </Modal.Header>
       <Modal.Body>
-        <h4>שם הסופר - + {writerName}  </h4>
+        {/* <h4>שם הסופר - + {writerName}  </h4>
         <h4>מצב הספר + {name} </h4>
         <h4>קטגוריה -+ {category}  </h4>
         <h4>מחיר -+ {price}  </h4>
         <p>
           תמונה
-        </p>
+        </p> */}
       </Modal.Body>
       <Modal.Footer>
         <Button onClick={props.onHide}>סגור</Button>
@@ -67,9 +67,19 @@ const [price,setPrice] = useState();
   );
 }
 
-function Modal1() {
+function Modal1({ad}) {
   const [modalShow, setModalShow] = React.useState(false);
-
+  const [book, setBook] = useState({ name: '' })
+  useEffect(() => {
+    //alert(id)
+    console.log('ad : ', ad)
+    axios.get(`http://localhost:5000/getBookById/${ad.bookID}`).then(res => {
+      debugger
+      console.log(res.data[0])
+      console.log(res.data[0].name)
+      setBook(res.data[0])
+    })
+  }, [])
   return (
     <div>
       <Button variant="primary" onClick={() => setModalShow(true)}>
@@ -77,6 +87,8 @@ function Modal1() {
       </Button>
 
       <MyVerticallyCenteredModal
+      ad ={ad}
+      book = {book}
         show={modalShow}
         onHide={() => setModalShow(false)}
       />

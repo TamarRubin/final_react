@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import { BrowserRouter, Redirect, useHistory } from 'react-router-dom';
 import SignIn from './signIn/SignIn';
 import SignUp from './signUp/signUp.component';
+const loggedInUser = localStorage.getItem("user");
 function Header() {
   const history = useHistory();
 
@@ -20,9 +21,8 @@ function Header() {
     history.push('Filters');
   }
   return <div>
-  
-
-    <Button type="button" onClick={getSignIn}>
+    
+    <Button type="button" onClick={getSignIn} className='button'>
       כניסה    </Button>
 
 
@@ -33,9 +33,8 @@ function Header() {
     <Button type="button" onClick={getAddNewAd}>
       +פרסום מודעה חדשה    </Button>
 
-    <Button type="button" onClick={getFilters}>
+      <Button type="button" onClick={getFilters}>
        חיפוש ספר    </Button>
-
 
 
   </div>

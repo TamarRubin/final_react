@@ -25,7 +25,7 @@ function Filters() {
       })
       .catch((err) => console.log(err));
 
-    axios.get("http://localhost:5000/getAllPublishings")
+      axios.get("http://localhost:5000/getAllPublishings")
       .then(res => {
         console.log(res.data);
         setPublishings(res.data);

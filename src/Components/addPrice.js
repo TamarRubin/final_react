@@ -1,48 +1,73 @@
-import React, {useState} from 'react'
+import React, { useState, useEffect } from 'react'
 import { Form, Button } from 'react-bootstrap'
-//import './signUp.css'
 import axios from 'axios'
 
-import { Link } from 'react-router-dom';
-import { BrowserRouter, Redirect, useHistory , useParams} from 'react-router-dom';
-import AddNewBook from './addNewBook';
+import { Link, withRouter } from 'react-router-dom'
+import { useHistory } from 'react-router-dom'
 
-export function AddPrice() {
-    
-    const [bookId,setBookId] = useState();
-
+function AddPrice (props) {
   
-    const [price,setPrice] = useState();
-    const history = useHistory();
-    const UserId = localStorage.user.id
-    const bookName = this.params.name
-    const status = this.params.status
-    const handleEvent=()=>{
-    //alert("name:" +bookName + " "+lastname+",phone:"+phone+"  ,mail+"+email+"password "+password)
-    axios.post("http://localhost:5000/Addad",{adsiduser:UserId,adsNamebook:bookName,adsprice:price,adstype:status})
-       .then(res=>console.log("res from sign up",res));
+  const [price, setPrice] = useState()
+  const history = useHistory()
+  const UserId = JSON.parse(localStorage.getItem('user')).id
+  const bookName = props.match.params.bookName
+  const status = props.match.params.status
+  const [bookID, setBookID] = useState()
+  useEffect(() => {
+
+    axios
+      .get(`http://localhost:5000/getIdBookByNameNotOk/${bookName}`)
+      .then(res => {
+        console.log('res', res)
+        debugger
+        setBookID(res.data[0].id)
+      })
+  }, [])
+
+  const handleEvent = () => {
     debugger
+    axios
+      .post('http://localhost:5000/Addad', {
+        adsiduser: UserId,
+        adsNamebook: bookID,
+        adsprice: price,
+        adstype: status
+      })
+      .then(res1 => {
+        console.log('res from add ad', res1)
+        if(res1.status === 200){
+           alert(" המודעה נוספה בהצלחה")
+           history.push("/")
+        }
+       
+      
+      })
+  }
 
+  return (
+    <form>
+      <h3>פרסום ספר</h3>
+
+      <div className='form-group'>
+        <label>מחיר</label>
+        <input
+          type='text'
+          className='form-control'
+          placeholder='מחיר'
+          onChange={e => {
+            setPrice(e.target.value)
+          }}
+        />
+      </div>
+
+      <button
+        type='button'
+        onClick={handleEvent}
+        className='btn btn-dark btn-lg btn-block'
+      >
+        הוספת מודעה
+      </button>
+    </form>
+  )
 }
-
-    return (
-        <form>
-            <h3>פרסום ספר</h3>
-
-            <div className="form-group">
-                <label>מחיר</label>
-                <input type="text" className="form-control" placeholder="מחיר"
-                 onChange={(e) => { setPrice(e.target.value) }} />
-            </div>
-
-        
-           
-
-
-            <button type="submit" onClick={handleEvent} className="btn btn-dark btn-lg btn-block">הוספת מודעה</button>
-            {/* <Button variant="link">התחברות</Button> */}
-           
-        </form>
-    );
-}
-
+export default withRouter(AddPrice)
