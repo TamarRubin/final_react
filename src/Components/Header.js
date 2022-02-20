@@ -55,6 +55,7 @@ const ResponsiveAppBar = () => {
     history.push('signUp')
   };
   return (
+    <div>
     <AppBar position="static">
       <Container maxWidth="xl">
         <Toolbar disableGutters>
@@ -169,6 +170,7 @@ const ResponsiveAppBar = () => {
         </Toolbar>
       </Container>
     </AppBar>
+      </div>
   );
 };
 export default ResponsiveAppBar;

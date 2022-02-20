@@ -15,6 +15,9 @@ function Ads () {
     })
   }, [])
 
+  const cards1 = [1, 2, 3];
+  const cards2 = [4, 5, 6];
+  const cards3 = [7, 8, 9];
   // const [books, setBooks] = useState([
   //   {
   //     name: 'lalala',
@@ -45,12 +48,27 @@ function Ads () {
     <Table>
       <tbody>
         <tr>
-          {adsID.map(ad => (
+          {cards1.map(card =>(
             <td>
-              <Ad ad={ad}></Ad>
+              <Ad ad={adsID[card]} ></Ad>
             </td>
           ))}
         </tr>
+        <tr>
+          {cards2.map(card =>(
+            <td>
+              <Ad ad={adsID[card]} ></Ad>
+            </td>
+          ))}
+        </tr>
+        <tr>
+          {cards3.map(card =>(
+            <td>
+              <Ad ad={adsID[card]} ></Ad>
+            </td>
+          ))}
+        </tr>
+        {/*  */}
       </tbody>
     </Table>
   )

@@ -5,17 +5,27 @@ import CssBaseline from '@mui/material/CssBaseline'
 import TextField from '@mui/material/TextField'
 import FormControlLabel from '@mui/material/FormControlLabel'
 import Checkbox from '@mui/material/Checkbox'
+import { CacheProvider } from '@emotion/react';
+import createCache from '@emotion/cache';
 import Link from '@mui/material/Link'
 import Paper from '@mui/material/Paper'
 import Box from '@mui/material/Box'
 import Grid from '@mui/material/Grid'
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined'
-
+import Form from 'react-bootstrap/Form'
 import Typography from '@mui/material/Typography'
 import { createTheme, ThemeProvider } from '@mui/material/styles'
+import rtlPlugin from 'stylis-plugin-rtl';
+
 
 import { useHistory } from 'react-router-dom'
 import axios from 'axios'
+
+const cacheRtl = createCache({
+  key: 'muirtl',
+  stylisPlugins: [rtlPlugin],
+});
+
 function Copyright (props) {
   return (
     <Typography
@@ -33,8 +43,9 @@ function Copyright (props) {
     </Typography>
   )
 }
-
-const theme = createTheme()
+const theme = createTheme({
+  direction: 'rtl',
+});
 
 export default function SignUpSide () {
     
@@ -64,26 +75,11 @@ export default function SignUpSide () {
   }
 
   return (
+    <CacheProvider value={cacheRtl}>
     <ThemeProvider theme={theme}>
       <Grid container component='main' sx={{ height: '100vh' }}>
         <CssBaseline />
-        <Grid
-          item
-          xs={false}
-          sm={4}
-          md={7}
-          sx={{
-            backgroundImage:
-              'url(https://yefe.co.il/wp-content/uploads/2021/12/%D7%A7%D7%A8%D7%90.gif)',
-            backgroundRepeat: 'no-repeat',
-            backgroundColor: t =>
-              t.palette.mode === 'light'
-                ? t.palette.grey[50]
-                : t.palette.grey[900],
-            backgroundSize: 'cover',
-            backgroundPosition: 'center'
-          }}
-        />
+        
         <Grid item xs={12} sm={8} md={5} component={Paper} elevation={6} square>
           <Box
             sx={{
@@ -106,7 +102,7 @@ export default function SignUpSide () {
               onSubmit={handleSubmit}
               sx={{ mt: 1 }}
             >
-              <TextField
+              <TextField 
                 margin='normal'
                 required
                 fullWidth
@@ -156,10 +152,14 @@ export default function SignUpSide () {
                 id='password'
                 autoComplete='current-password'
               />
-              <FormControlLabel
-                control={<Checkbox value='remember' color='primary' />}
-                label='זכור אותי'
-              />
+             <Form.Select aria-label="Default select example" margin='normal'>
+      <option>בחר עיר</option>
+      {/* {cities?.map(city => <option key={city?.name}>{city?.name}</option>)} */}
+    </Form.Select>
+    <Form.Select aria-label="Default select example">
+      <option>בחר שכונה</option>
+      {/* {cities?.map(city => <option key={city?.name}>{city?.name}</option>)} */}
+    </Form.Select>
               <Button
                 type='submit'
                 fullWidth
@@ -184,7 +184,25 @@ export default function SignUpSide () {
             </Box>
           </Box>
         </Grid>
+        <Grid
+          item
+          xs={false}
+          sm={4}
+          md={7}
+          sx={{
+            backgroundImage:
+              'url(https://yefe.co.il/wp-content/uploads/2021/12/%D7%A7%D7%A8%D7%90.gif)',
+            backgroundRepeat: 'no-repeat',
+            backgroundColor: t =>
+              t.palette.mode === 'light'
+                ? t.palette.grey[50]
+                : t.palette.grey[900],
+            backgroundSize: 'cover',
+            backgroundPosition: 'center'
+          }}
+        />
       </Grid>
     </ThemeProvider>
+    </CacheProvider>
   )
 }

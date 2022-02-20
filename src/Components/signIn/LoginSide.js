@@ -13,12 +13,18 @@ import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 
 import Typography from '@mui/material/Typography';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
+import { CacheProvider } from '@emotion/react';
+import createCache from '@emotion/cache';
 
-import logo from './images/logo.png'
+//import logo from '../images/logo.png'
 import { useHistory } from 'react-router-dom'
+
+import rtlPlugin from 'stylis-plugin-rtl';
+
 import axios from 'axios'
 function Copyright(props) {
   return (
+    
     <Typography variant="body2" color="text.secondary" align="center" {...props}>
       {'Copyright © '}
       <Link color="inherit" href="https://mui.com/">
@@ -28,8 +34,10 @@ function Copyright(props) {
       {'.'}
     </Typography>
   );
-}
-
+}const cacheRtl = createCache({
+  key: 'muirtl',
+  stylisPlugins: [rtlPlugin],
+});
 const theme = createTheme();
 
 export default function SignInSide() {
@@ -67,23 +75,11 @@ export default function SignInSide() {
   };
 
   return (
+    <CacheProvider value={cacheRtl}>
     <ThemeProvider theme={theme}>
       <Grid container component="main" sx={{ height: '100vh' }}>
         <CssBaseline />
-        <Grid
-          item
-          xs={false}
-          sm={4}
-          md={7}
-          sx={{
-            backgroundImage: 'url(https://yefe.co.il/wp-content/uploads/2021/12/%D7%A7%D7%A8%D7%90.gif)',
-            backgroundRepeat: 'no-repeat',
-            backgroundColor: (t) =>
-              t.palette.mode === 'light' ? t.palette.grey[50] : t.palette.grey[900],
-            backgroundSize: 'cover',
-            backgroundPosition: 'center',
-          }}
-        />
+       
         <Grid item xs={12} sm={8} md={5} component={Paper} elevation={6} square>
           <Box
             sx={{
@@ -149,7 +145,22 @@ export default function SignInSide() {
             </Box>
           </Box>
         </Grid>
+        <Grid
+          item
+          xs={false}
+          sm={4}
+          md={7}
+          sx={{
+            backgroundImage: 'url(https://yefe.co.il/wp-content/uploads/2021/12/%D7%A7%D7%A8%D7%90.gif)',
+            backgroundRepeat: 'no-repeat',
+            backgroundColor: (t) =>
+              t.palette.mode === 'light' ? t.palette.grey[50] : t.palette.grey[900],
+            backgroundSize: 'cover',
+            backgroundPosition: 'center',
+          }}
+        />
       </Grid>
     </ThemeProvider>
+    </CacheProvider>
   );
 }

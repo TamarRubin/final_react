@@ -10,8 +10,9 @@ import AddNewAd from './Components/addNewAd'
 import Manager from './Components/manager'
 import AddNewBook from './Components/addNewBook'
 import AddPrice from './Components/addPrice'
-import SignInSide from './LoginSide'
+import SignInSide from './Components/signIn/LoginSide'
 import SignUpSide from './Components/signUp/signUp2'
+import VerticalLinearStepper from './Components/stepper'
 //import DropdownFilterCell from './Components/filters1';
 //import dashboard from './Components/dashboard';
 //import Preferences from './Components/Preferences';
@@ -33,7 +34,7 @@ function App () {
             <SignUpSide></SignUpSide>
           </Route>
           <Route path='/AddNewAd'>
-            <AddNewAd></AddNewAd>
+            <VerticalLinearStepper></VerticalLinearStepper>
           </Route>
           <Route path='/AddNewBook/:name'>
             <AddNewBook></AddNewBook>
