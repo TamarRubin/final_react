@@ -34,9 +34,9 @@ function Copyright (props) {
       align='center'
       {...props}
     >
-      {'Copyright © '}
+      {'Michal&Tamar © '}
       <Link color='inherit' href='https://mui.com/'>
-        Your Website
+        שוק-בוק
       </Link>{' '}
       {new Date().getFullYear()}
       {'.'}

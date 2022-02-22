@@ -26,9 +26,9 @@ function Copyright(props) {
   return (
     
     <Typography variant="body2" color="text.secondary" align="center" {...props}>
-      {'Copyright © '}
+      {'Michal&Tamar © '}
       <Link color="inherit" href="https://mui.com/">
-        Your Website
+        שוק-בוק
       </Link>{' '}
       {new Date().getFullYear()}
       {'.'}
@@ -68,7 +68,7 @@ export default function SignInSide() {
         
         alert('hello ' + JSON.parse(localStorage.getItem('user')).name)
         if (res.status === 200) {
-          if (res.data.isManager === 0) history.push('/filters')
+          if (res.data.isManager === 0) history.push('/')
           else history.push('/Manager')
         }
       })
@@ -117,10 +117,7 @@ export default function SignInSide() {
                 id="password"
                 autoComplete="current-password"
               />
-              <FormControlLabel
-                control={<Checkbox value="remember" color="primary" />}
-                label="זכור אותי"
-              />
+             
               <Button
                 type="submit"
                 fullWidth

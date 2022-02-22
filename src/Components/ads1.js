@@ -57,11 +57,18 @@ export default function Album() {
       <CssBaseline />
      
       <main>
-        {/* Hero unit */}
+      <Grid container spacing={2} columns={16}>
+  <Grid item xs={8}>
+   aaaa
+  </Grid>
+  <Grid item xs={8}>
+    
+  </Grid>
+</Grid>
 
         <Container sx={{ py: 8 }} maxWidth="md">
           {/* End hero unit */}
-          <Grid container spacing={4}>
+          <Grid container spacing={15}>
             {adsID.map((card) => (
               <Grid item key={card} xs={12} sm={6} md={4}>
                 

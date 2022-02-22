@@ -17,7 +17,8 @@ import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { CacheProvider } from '@emotion/react';
 import createCache from '@emotion/cache';
 import MenuBookIcon from '@mui/icons-material/MenuBook';
-//import { Form, Button } from 'react-bootstrap'
+import MenuItem from '@mui/material/MenuItem';
+import { Form } from 'react-bootstrap'
 //import './signUp.css'
 import axios from 'axios'
 
@@ -47,7 +48,9 @@ function Copyright(props) {
 });
 const theme = createTheme();
 
-function AddNewAd () {
+
+
+function AddNewBook2 (props) {
   const [bookName, setBookName] = useState()
   const [bookId, setBookId] = useState()
 
@@ -57,25 +60,67 @@ function AddNewAd () {
   // const [isbn,setIsbn] = useState();
   // const [image,setImage] = useState();
   // const [price,setPrice] = useState();
+  const [writerName, setWriterName] = useState(null)
+  const [publishName, setPublishName] = useState(null)
+  const [category, setCategory] = useState(null)
+  const [isbn, setIsbn] = useState(null)
+  const [image, setImage] = useState(null)
+  const [price, setPrice] = useState(null)
+  let {name} = useParams()
   const history = useHistory()
-
+  
   const handleEvent = (event) => {
+    
     event.preventDefault();
     const data = new FormData(event.currentTarget);
-    console.log('book', data.get('book'))
-    axios.get(`http://localhost:5000/getIdBookByName/${data.get('book')}`).then(res => {
-      console.log('res', res)
 
-      if (res.data.length != 0) {
-        alert("הספר קיים במערכת")
-        history.push(`/addPrice/${data.get('book')}/${1}`)
-      } else {
-        history.push(`/AddNewBook/${data.get('book')}`)
-       
-      }
-    })
+    alert('name: '+ name)
+    console.log('name: ',name )
+    debugger
+    axios
+      .post('http://localhost:5000/AddBook', {
+        isbn: data.get('isbn'),
+        name: name,
+        publishing:1,// data.get('publishing'),
+        writer:1,// data.get('writer'),
+        status: 1,
+        image: "image.jpg",
+        confirm: 0
+      })
+      .then(res => {
+        console.log('res from add book', res)
+        debugger
+        history.push(`/addPrice/${name}/${0}`)
+      })
   }
-
+ 
+  
+  const currencies = [
+    {
+      value: 'USD',
+      label: '$',
+    },
+    {
+      value: 'EUR',
+      label: '€',
+    },
+    {
+      value: 'BTC',
+      label: '฿',
+    },
+    {
+      value: 'JPY',
+      label: '¥',
+    },
+  ];
+  
+ 
+    const [currency, setCurrency] = React.useState('EUR');
+  
+    const handleChange = (event) => {
+      setCurrency(event.target.value);
+    };
+  
   return (
     <CacheProvider value={cacheRtl}>
     <ThemeProvider theme={theme}>
@@ -96,19 +141,98 @@ function AddNewAd () {
               <MenuBookIcon />
             </Avatar>
             <Typography component="h1" variant="h5">
-             תודה לך
+            פרטי ספר חדש
             </Typography>
             <Box component="form" noValidate onSubmit={handleEvent} sx={{ mt: 1 }}>
+              {/* <TextField
+                margin="normal"
+                required
+                fullWidth
+                id="writer"
+                label="סופר"
+                name="writer"
+                autoComplete="writer"
+                autoFocus
+              />
               <TextField
                 margin="normal"
                 required
                 fullWidth
-                id="book"
-                label="בדקו אם הספר קיים במערכת"
-                name="book"
-                autoComplete="book"
+                id="publishing"
+                label="הוצאה לאור"
+                name="publishing"
+                autoComplete="publishing"
+                autoFocus
+              />*/}
+         
+              
+              <Form.Select
+                   aria-label="Default select example"
+                    margin='normal'
+                    fullWidth
+                    id="writer"
+                    label="סופר"
+                    name="writer"
+                    autoComplete="writer"
+                    autoFocus>
+      <option>סופר</option>
+      {/* {cities?.map(city => <option key={city?.name}>{city?.name}</option>)} */}
+   </Form.Select>
+                  <Form.Select
+                   aria-label="Default select example"
+                    margin='normal'
+                    fullWidth
+                    id="publishing"
+                label="הוצאה לאור"
+                name="publishing"
+                autoComplete="publishing"
+                autoFocus>
+      <option>קטגוריה</option>
+      {/* {cities?.map(city => <option key={city?.name}>{city?.name}</option>)} */}
+    </Form.Select>
+    
+    <TextField
+                margin="normal"
+                required
+                fullWidth
+                id="isbn"
+                label="isbn"
+                name="isbn"
+                autoComplete="isbn"
                 autoFocus
               />
+            <TextField
+            fullWidth
+            id="publishing"
+          select
+          label="הוצאה לאור"
+          value={currency}
+          onChange={handleChange}
+        
+        >
+          {currencies.map((option) => (
+            <MenuItem key={option.value} value={option.value}>
+              {option.label}
+            </MenuItem>
+          ))}
+        </TextField>
+        <form >
+  <input type="file" id="myFile" name="filename" ></input>
+
+</form> 
+{/* 
+ 
+  <Button
+                type="file"
+                id="myFile"
+                 name="filename"
+                fullWidth
+                variant="contained"
+                sx={{ mt: 3, mb: 2 }}
+              >
+                הוספת תמונה
+          </Button>     */}
+
             
               
               <Button
@@ -117,7 +241,7 @@ function AddNewAd () {
                 variant="contained"
                 sx={{ mt: 3, mb: 2 }}
               >
-                חפש
+                שלח לבדיקה
               </Button>
               <Grid container>
                 <Grid item xs>
@@ -148,4 +272,4 @@ function AddNewAd () {
     </CacheProvider>
   );
 }
-export default AddNewAd
+export default AddNewBook2

@@ -16,7 +16,13 @@ function Header () {
     history.push('signUp')
   }
   function getAddNewAd () {
+ 
+    if("user" in localStorage){
     history.push('AddNewAd')
+   } else{
+    alert("משתמש לא רשום אינו יכול להוסיף מודעה")
+    history.push('signIn')
+   }
   }
   function getFilters () {
     history.push('Filters')
@@ -45,6 +51,11 @@ function Header () {
         <div class='div7'>
           <Button type='button' onClick={getFilters}>
             חיפוש ספר{' '}
+          </Button>{' '}
+        </div>
+        <div class='div7'>
+          <Button type='button' onClick={getFilters}>
+            מענין לדעת{' '}
           </Button>{' '}
         </div>
       </div>

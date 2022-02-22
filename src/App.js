@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import axios from 'axios'
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 import SignIn from './Components/signIn/SignIn'
@@ -8,16 +8,20 @@ import FirstPage from './Components/FirstPage'
 import Filters from './Components/Filters'
 import AddNewAd from './Components/addNewAd'
 import Manager from './Components/manager'
-import AddNewBook from './Components/addNewBook'
+import AddNewBook2 from './Components/addBook2'
 import AddPrice from './Components/addPrice'
 import SignInSide from './Components/signIn/LoginSide'
 import SignUpSide from './Components/signUp/signUp2'
+
+//import Budget from './Components/statistic'
 import VerticalLinearStepper from './Components/stepper'
 //import DropdownFilterCell from './Components/filters1';
 //import dashboard from './Components/dashboard';
 //import Preferences from './Components/Preferences';
 function App () {
- 
+ useEffect(() => {
+  localStorage.clear()
+ }, []);
   return (
     <>
       <Router>
@@ -34,10 +38,10 @@ function App () {
             <SignUpSide></SignUpSide>
           </Route>
           <Route path='/AddNewAd'>
-            <VerticalLinearStepper></VerticalLinearStepper>
+            <AddNewAd></AddNewAd>
           </Route>
           <Route path='/AddNewBook/:name'>
-            <AddNewBook></AddNewBook>
+            <AddNewBook2></AddNewBook2>
           </Route>
           
           <Route path='/addPrice/:bookName/:status'>
@@ -46,6 +50,7 @@ function App () {
           <Route path="/filters">
            <Filters/>
           </Route>
+      
           <Route exact path='/'>
             <FirstPage></FirstPage>
           </Route>
@@ -54,6 +59,7 @@ function App () {
       
 
     </>
+
   )
 }
 

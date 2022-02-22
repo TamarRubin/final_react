@@ -3,42 +3,19 @@ import axios from  'axios'
 import {  Button,Modal} from 'react-bootstrap';
 function MyVerticallyCenteredModal(props) {
 debugger
-// const [okAds,setOkAds] = useState();
-// const [userID,setIDuser] = useState();
-// const [bookID,setIDbook] = useState();
-// const [price,setPrice] = useState();
-//   axios.get("http://localhost:5000/getAllOkAds")
-//   .then((res)=>{
-//    // alert(res.data[0])
-//     debugger
-//       setOkAds(res.data);
-//       console.log("res from modal ",res)
-//       setIDuser(res.data[0].userID)
-//       setIDbook(res.data[0].bookID)
-//      // alert(res.data[0].bookID +": book id")
-//       setPrice(res.data[0].price)
-//       debugger
-//      // alert("hello " +res.data.id );     
-//   }); 
-//   debugger
+const [color, setColor] = React.useState(null);
 
-//     const [name,setName] = useState();
-//     const [writerName,setWriterName] = useState();
-//     const [publishName,setPublishName] = useState();
-//     const [category,setCategory] = useState();
-//     const [isbn,setIsbn] = useState();
-//     const [image,setImage] = useState();
-
-// axios.get(`http://localhost:5000/getBookById/:${bookID}`)
-//   .then((res)=>{
-//     setName(res.data.name)
-//       setWriterName(res.data.writerID)
-//       setPublishName(res.data.publishingID)
-//       setCategory(res.data.categoryID)
-//       setImage(res.data.picture)
-//       console.log("res from modal ",res)
-         
-//   });
+useEffect(() => {
+ setColor('white')
+}, []);
+const showDitails = (event) => {
+  if("user" in localStorage){
+    setColor('black')
+  }else{
+    alert("משתמש לא רשום אינו יכול לצפות בפרטי מוכר")
+  }
+  
+}
   return (
     <Modal
       {...props}
@@ -48,19 +25,29 @@ debugger
     >
       <Modal.Header >
         <Modal.Title id="contained-modal-title-vcenter">
-          שם הספר:  {props.book.name}
+          שם הספר:  {props.ad.book_name}
         </Modal.Title>
       </Modal.Header>
       <Modal.Body>
-        {/* <h4>שם הסופר - + {writerName}  </h4>
-        <h4>מצב הספר + {name} </h4>
-        <h4>קטגוריה -+ {category}  </h4>
-        <h4>מחיר -+ {price}  </h4>
-        <p>
+        <tr>
+          <td>
+             <h4>שם הסופר : {props.ad.writer_name}  </h4>
+        
+        <h4>קטגוריה : {props.ad.category}  </h4>
+        <h4>הוצאה לאור : {props.ad.publish}  </h4>
+        <h4>מחיר : {props.ad.price}  </h4>
+          </td>
+        </tr>
+        
+       {/*  <p>
           תמונה
         </p> */}
       </Modal.Body>
       <Modal.Footer>
+        <h5 style={{color}}>{props.ad?.user_name}</h5>
+        <h5 style={{color}}>{props.ad?.user_phone}</h5>
+        <h5 style={{color}}>{props.ad?.user_mail}</h5>
+        <Button onClick={showDitails}>פרטי מוכר</Button>
         <Button onClick={props.onHide}>סגור</Button>
       </Modal.Footer>
     </Modal>
@@ -69,17 +56,7 @@ debugger
 
 function Modal1({ad}) {
   const [modalShow, setModalShow] = React.useState(false);
-  const [book, setBook] = useState({ name: '' })
-  useEffect(() => {
-    //alert(id)
-    console.log('ad : ', ad)
-    axios.get(`http://localhost:5000/getBookById/${ad.bookID}`).then(res => {
-      debugger
-      console.log(res.data[0])
-      console.log(res.data[0].name)
-      setBook(res.data[0])
-    })
-  }, [])
+
   return (
     <div>
       <Button variant="primary" onClick={() => setModalShow(true)}>
@@ -88,7 +65,7 @@ function Modal1({ad}) {
 
       <MyVerticallyCenteredModal
       ad ={ad}
-      book = {book}
+      
         show={modalShow}
         onHide={() => setModalShow(false)}
       />
