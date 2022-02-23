@@ -53,6 +53,8 @@ export default function Album() {
   }, [])
 
   return (
+    // <div style={{ backgroundColor: 'orange'}}>
+    <div>
     <ThemeProvider theme={theme}>
       <CssBaseline />
      
@@ -92,5 +94,6 @@ export default function Album() {
       </Box> */}
       {/* End footer */}
     </ThemeProvider>
+    </div>
   );
 }

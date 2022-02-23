@@ -93,7 +93,7 @@ function Filters () {
     setCategory(event.target.value);
   };
   return (
-    <div>
+    <div style={{ backgroundColor: 'white'}}>
           <Box sx={{ minWidth: 60 }}>
       <FormControl sx={{ m: 1, minWidth: 120 }}>
         <InputLabel id="demo-simple-select-label">עיר</InputLabel>
@@ -103,6 +103,7 @@ function Filters () {
           value={city}
           label="עיר"
           onChange={handleCity}
+        
         >
            
           {cities?.map(c => (
