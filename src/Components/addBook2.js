@@ -121,9 +121,9 @@ function AddNewBook2 (props) {
   
  
   
-    const [writer, setWriter] = useState(9)
-  const [publishing, setPublishing] = useState(4)
-  const [category, setCategory] = useState(7)
+    const [writer, setWriter] = useState()
+  const [publishing, setPublishing] = useState()
+  const [category, setCategory] = useState()
 
   const [writers, setWriters] = useState([])
   const [publishings, setPublishings] = useState([])
