@@ -16,7 +16,7 @@ function Header () {
     history.push('signUp')
   }
   function getAddNewAd () {
- 
+ debugger
     if("user" in localStorage){
     history.push('AddNewAd')
    } else{
@@ -48,11 +48,7 @@ function Header () {
             +פרסום מודעה חדשה{' '}
           </Button>
         </div>
-        <div class='div7'>
-          <Button type='button' onClick={getFilters}>
-            חיפוש ספר{' '}
-          </Button>{' '}
-        </div>
+        
         <div class='div7'>
           <Button type='button' onClick={getFilters}>
             מענין לדעת{' '}

@@ -56,7 +56,7 @@ function AddPrice (props) {
   const status = props.match.params.status
   const [bookID, setBookID] = useState()
   useEffect(() => {
-
+    debugger
     axios
       .get(`http://localhost:5000/getIdBookByNameNotOk/${bookName}`)
       .then(res => {
@@ -74,7 +74,7 @@ function AddPrice (props) {
       .post('http://localhost:5000/Addad', {
         adsiduser: UserId,
         adsNamebook: bookID,
-        adsprice: data.get('email'),
+        adsprice: data.get('price'),
         adstype: status
       })
       .then(res1 => {

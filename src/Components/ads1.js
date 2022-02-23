@@ -58,12 +58,8 @@ export default function Album() {
      
       <main>
       <Grid container spacing={2} columns={16}>
-  <Grid item xs={8}>
-   aaaa
-  </Grid>
-  <Grid item xs={8}>
-    
-  </Grid>
+
+
 </Grid>
 
         <Container sx={{ py: 8 }} maxWidth="md">

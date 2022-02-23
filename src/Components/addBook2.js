@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 //import * as React from 'react';
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
@@ -21,7 +21,14 @@ import MenuItem from '@mui/material/MenuItem';
 import { Form } from 'react-bootstrap'
 //import './signUp.css'
 import axios from 'axios'
+import { styled } from '@mui/material/styles';
+import IconButton from '@mui/material/IconButton';
+import PhotoCamera from '@mui/icons-material/PhotoCamera';
+import Stack from '@mui/material/Stack';
 
+import InputLabel from '@mui/material/InputLabel';
+import FormControl from '@mui/material/FormControl';
+import Select from '@mui/material/Select';
 //import { Link } from 'react-router-dom'
 import {
   BrowserRouter,
@@ -29,7 +36,11 @@ import {
   useHistory,
   useParams
 } from 'react-router-dom'
-import AddNewBook from './addNewBook'
+
+
+const Input = styled('input')({
+  display: 'none',
+});
 function Copyright(props) {
   return (
     
@@ -51,21 +62,32 @@ const theme = createTheme();
 
 
 function AddNewBook2 (props) {
-  const [bookName, setBookName] = useState()
-  const [bookId, setBookId] = useState()
+  useEffect(() => {
+    debugger
+    axios
+      .get('http://localhost:5000/getAllWriters')
+      .then(res => {
+        console.log(res.data)
+        setWriters(res.data)
+      })
+      .catch(err => console.log(err))
+    axios
+      .get('http://localhost:5000/getAllPublishings')
+      .then(res => {
+        console.log(res.data)
+        setPublishings(res.data)
+      })
+      .catch(err => console.log(err))
 
-  // const [writerName,setWriterName] = useState();
-  // const [publishName,setPublishName] = useState();
-  // const [category,setCategory] = useState();
-  // const [isbn,setIsbn] = useState();
-  // const [image,setImage] = useState();
-  // const [price,setPrice] = useState();
-  const [writerName, setWriterName] = useState(null)
-  const [publishName, setPublishName] = useState(null)
-  const [category, setCategory] = useState(null)
-  const [isbn, setIsbn] = useState(null)
-  const [image, setImage] = useState(null)
-  const [price, setPrice] = useState(null)
+    axios
+      .get('http://localhost:5000/getAllCategories')
+      .then(res => {
+        console.log(res.data)
+        setCategories(res.data)
+      })
+      .catch(err => console.log(err))
+  }, [])
+ 
   let {name} = useParams()
   const history = useHistory()
   
@@ -81,9 +103,9 @@ function AddNewBook2 (props) {
       .post('http://localhost:5000/AddBook', {
         isbn: data.get('isbn'),
         name: name,
-        publishing:1,// data.get('publishing'),
-        writer:1,// data.get('writer'),
-        status: 1,
+        publishing:publishing,// data.get('publishing'),
+        writer:writer,
+        status: category,
         image: "image.jpg",
         confirm: 0
       })
@@ -95,32 +117,33 @@ function AddNewBook2 (props) {
   }
  
   
-  const currencies = [
-    {
-      value: 'USD',
-      label: '$',
-    },
-    {
-      value: 'EUR',
-      label: '€',
-    },
-    {
-      value: 'BTC',
-      label: '฿',
-    },
-    {
-      value: 'JPY',
-      label: '¥',
-    },
-  ];
+ 
   
  
-    const [currency, setCurrency] = React.useState('EUR');
   
-    const handleChange = (event) => {
-      setCurrency(event.target.value);
+    const [writer, setWriter] = useState(9)
+  const [publishing, setPublishing] = useState(4)
+  const [category, setCategory] = useState(7)
+
+  const [writers, setWriters] = useState([])
+  const [publishings, setPublishings] = useState([])
+  const [categories, setCategories] = useState([])
+  const handleCat = (event) => {
+    debugger
+    setCategory(event.target.value);
+  };
+  
+    const handleWriter = (event) => {
+      debugger
+      setWriter(event.target.value);
+     // alert(city)
     };
-  
+    const handlePub = (event) => {
+      debugger
+      setPublishing(event.target.value);
+     // alert(city)
+    };
+
   return (
     <CacheProvider value={cacheRtl}>
     <ThemeProvider theme={theme}>
@@ -164,34 +187,65 @@ function AddNewBook2 (props) {
                 autoComplete="publishing"
                 autoFocus
               />*/}
+               <div>
+          <FormControl sx={{ m: 1, minWidth: 120 }}>
+        <InputLabel id="demo-simple-select-label">סופר</InputLabel>
+        <Select
+        fullWidth
+          labelId="demo-simple-select-label"
+          id="demo-simple-select"
+          value={writer}
+          label="סופר"
+          onChange={handleWriter}
+        >
+          
+          {writers?.map(w => (
+          <MenuItem name={w?.name} value={w?.id}>{w?.name}</MenuItem>
+        ))}
          
-              
-              <Form.Select
-                   aria-label="Default select example"
-                    margin='normal'
-                    fullWidth
-                    id="writer"
-                    label="סופר"
-                    name="writer"
-                    autoComplete="writer"
-                    autoFocus>
-      <option>סופר</option>
-      {/* {cities?.map(city => <option key={city?.name}>{city?.name}</option>)} */}
-   </Form.Select>
-                  <Form.Select
-                   aria-label="Default select example"
-                    margin='normal'
-                    fullWidth
-                    id="publishing"
-                label="הוצאה לאור"
-                name="publishing"
-                autoComplete="publishing"
-                autoFocus>
-      <option>קטגוריה</option>
-      {/* {cities?.map(city => <option key={city?.name}>{city?.name}</option>)} */}
-    </Form.Select>
-    
-    <TextField
+        </Select>
+      </FormControl>
+      <TextField id="standard-basic" label="אחר" variant="standard" />
+     </div>
+     <div>
+      <FormControl sx={{ m: 1, minWidth: 120 }}>
+        <InputLabel id="demo-simple-select-label">קטגוריה</InputLabel>
+        <Select
+        fullWidth
+          labelId="demo-simple-select-label"
+          id="demo-simple-select"
+          value={category}
+          label="קטגוריה"
+          onChange={handleCat}
+        >
+         
+          {categories?.map(c => (
+          <MenuItem name={c?.category} value={c?.id}>{c?.category}</MenuItem>
+        ))}
+         
+        </Select>
+      </FormControl>
+      <TextField id="standard-basic" label="אחר" variant="standard" />
+      </div>
+ <div>
+             <FormControl sx={{ m: 1, minWidth: 120 }}>
+        <InputLabel id="demo-simple-select-label">הוצאה לאור</InputLabel>
+        <Select
+          labelId="demo-simple-select-label"
+          id="demo-simple-select"
+          value={publishing}
+          label="הוצאה לאור"
+          onChange={handlePub}
+        >
+        
+          {publishings?.map(p => (
+          <MenuItem name={p?.name} value={p?.id}>{p?.name}</MenuItem>
+        ))}
+         
+        </Select>
+      </FormControl>
+      <TextField id="standard-basic" label="אחר" variant="standard" /></div>
+      <TextField
                 margin="normal"
                 required
                 fullWidth
@@ -201,38 +255,19 @@ function AddNewBook2 (props) {
                 autoComplete="isbn"
                 autoFocus
               />
-            <TextField
-            fullWidth
-            id="publishing"
-          select
-          label="הוצאה לאור"
-          value={currency}
-          onChange={handleChange}
-        
-        >
-          {currencies.map((option) => (
-            <MenuItem key={option.value} value={option.value}>
-              {option.label}
-            </MenuItem>
-          ))}
-        </TextField>
-        <form >
-  <input type="file" id="myFile" name="filename" ></input>
-
-</form> 
-{/* 
+       
  
-  <Button
-                type="file"
-                id="myFile"
-                 name="filename"
-                fullWidth
-                variant="contained"
-                sx={{ mt: 3, mb: 2 }}
-              >
-                הוספת תמונה
-          </Button>     */}
-
+  <Stack direction="row" alignItems="center" spacing={2}>
+    
+      <label htmlFor="icon-button-file">
+        <Input accept="image/*" id="icon-button-file" type="file" />
+        <IconButton color="primary" aria-label="upload picture" component="span">
+          <PhotoCamera />
+          <label>          הוספת תמונה
+          </label>
+        </IconButton>
+      </label>
+    </Stack>
             
               
               <Button

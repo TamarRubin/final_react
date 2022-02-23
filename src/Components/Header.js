@@ -17,8 +17,8 @@ import logo from '../images/logo2.png'
 import './Header.css'
 import { BrowserRouter, Redirect, useHistory } from 'react-router-dom'
 
-const pages = ['    ','+פירסום מודעה חדשה', ' ', 'חפש ספר'];
-const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
+const pages = ['+פירסום מודעה חדשה' ];
+
 
 const ResponsiveAppBar = () => {
   const history = useHistory()
@@ -37,12 +37,15 @@ const ResponsiveAppBar = () => {
   };
   const handleAds = () => {
     setAnchorElNav(null);
-    history.push('AddNewAd')
+    if("user" in localStorage){
+      history.push('AddNewAd')
+     } else{
+      alert("משתמש לא רשום אינו יכול להוסיף מודעה")
+      history.push('signIn')
+     }
+  
   };
-  const handleFilter = () => {
-    setAnchorElNav(null);
-    history.push('Filters')
-  };
+  
   const handleCloseUserMenu = () => {
     setAnchorElUser(null);
   };
@@ -53,6 +56,10 @@ const ResponsiveAppBar = () => {
  const handleSignUp = () => {
     setAnchorElUser(null);
     history.push('signUp')
+  };
+  const handleLogo = () => {
+    setAnchorElUser(null);
+    history.push('/')
   };
   return (
     <div>
@@ -65,7 +72,9 @@ const ResponsiveAppBar = () => {
             component="div"
             sx={{ mr: 2, display: { xs: 'none', md: 'flex' } }}
           >
-            <img src={logo}/>
+              <button onClick={handleLogo}>
+               <img src={logo}/>
+            </button>
           </Typography>
 
           <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
@@ -110,23 +119,26 @@ const ResponsiveAppBar = () => {
             component="div"
             sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}
           >
-            LOGO
+            <button onClick={handleLogo}>
+               <img src={logo}/>
+            </button>
+           
           </Typography>
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
           <Button
-                key={pages[1]}
+                key={pages[0]}
                 onClick={handleAds}
                 sx={{ my: 2, color: 'white', display: 'block', }}
               >
-                {pages[1]}
+                {pages[0]}
               </Button>
-              <Button
+              {/* <Button
                 key={pages[3]}
                 onClick={handleFilter}
                 sx={{ my: 2, color: 'white', display: 'block', }}
               >
                 {pages[3]}
-              </Button>
+              </Button> */}
           </Box>
 
           <Box sx={{ flexGrow: 0 }}>
