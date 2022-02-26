@@ -3,14 +3,15 @@ import Ad from './Ad'
 import { Table } from 'react-bootstrap'
 import axios from 'axios'
 
-function Ads () {
+function Ads() {
   const [adsID, setAdsID] = useState([])
   useEffect(() => {
+    debugger
     axios.get('http://localhost:5000/getAllOkAds').then(res => {
-     
+
       for (var i = 0; i < res.data.length; i++) {
-       debugger       
-        setAdsID(state =>[...state, res.data[i]])
+        debugger
+        setAdsID(state => [...state, res.data[i]])
       }
     })
   }, [])
@@ -42,17 +43,20 @@ function Ads () {
   //   }
   // ])
   return (
-    <Table>
-      <tbody>
-        <tr>
-          {adsID.map(ad => (
-            <td>
-              <Ad ad={ad}></Ad>
-            </td>
-          ))}
-        </tr>
-      </tbody>
-    </Table>
+    <div>
+      <input type='text'></input>
+      <Table>
+        <tbody>
+          <tr>
+            {adsID.map(ad => (
+              <td>
+                <Ad ad={ad}></Ad>
+              </td>
+            ))}
+          </tr>
+        </tbody>
+      </Table>
+    </div>
   )
 }
 
