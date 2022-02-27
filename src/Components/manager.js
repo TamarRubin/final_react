@@ -2,7 +2,7 @@ import React from "react";
 
 const Manager = () => {
     return (
-     <h1>manager   !!!</h1>
+     <h1> HELLO manager !!! </h1>
     );
 }
 
