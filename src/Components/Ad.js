@@ -11,7 +11,7 @@ function Ad ({ ad }) {
     axios.get(`http://localhost:5000/getAdById/${ad.id}`).then(res => {
       debugger
       console.log(res.data)
-      console.log(res.data[0].name)
+      console.log(res.data[0].book_name)
       setAd(res.data[0])
     })
   }, [])

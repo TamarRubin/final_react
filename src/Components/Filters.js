@@ -8,26 +8,26 @@ import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 import Button from '@mui/material/Button';
-
+import ContextIdAdsToShow from './context'
 function Filters () {
   const [cities, setcities] = useState([])
   const [books, setBooks] = useState([])
   const [writers, setWriters] = useState([])
   const [publishings, setPublishings] = useState([])
   const [categories, setCategories] = useState([])
-  
-  const [city, setcity] = useState('')
+  const [data, setData] = useState({ categoryID: '', bookID: '', authorID: '', publishingID: '', cityID: '' });
+ 
+  const [city, setcity] = useState()
   const [book, setBook] = useState()
   const [writer, setWriter] = useState()
   const [publishing, setPublishing] = useState()
   const [category, setCategory] = useState()
 
-  const search = (event)=>{
-    alert("let's search")
-  }
+
+
 
   useEffect(() => {
-    debugger
+    
     axios
       .get('http://localhost:5000/getAllcities')
       .then(res => {
@@ -68,41 +68,42 @@ function Filters () {
       })
       .catch(err => console.log(err))
   }, [])
-  const handleCity = (event) => {
+
+  const handleChange = (e) => {
     debugger
-    setcity(event.target.value);
-   // alert(city)
-  };
-  const handleWriter = (event) => {
-    debugger
-    setWriter(event.target.value);
-   // alert(city)
-  };
-  const handleBook = (event) => {
-    debugger
-    setBook(event.target.value);
-   // alert(city)
-  };
-  const handlePub = (event) => {
-    debugger
-    setPublishing(event.target.value);
-   // alert(city)
-  };
-  const handleCat = (event) => {
-    debugger
-    setCategory(event.target.value);
-  };
+    setData({
+      ...data,
+      [e.target.name]: e.target.value
+    })
+  }
+
+  
+const handleSubmit = () => {
+debugger
+    axios.post("http://localhost:5000/getAdsByFilters", data)
+      .then(res => {
+        <ContextIdAdsToShow.Provider value={res.data}></ContextIdAdsToShow.Provider>
+        console.log(res.data);
+       // setCategories(res.data);
+      })
+      .catch((err) =>{
+        console.log(err)
+      } )
+
+  }
   return (
+    
     <div style={{ backgroundColor: 'white'}}>
           <Box sx={{ minWidth: 60 }}>
       <FormControl sx={{ m: 1, minWidth: 120 }}>
         <InputLabel id="demo-simple-select-label">עיר</InputLabel>
         <Select
+          name='cityID'
           labelId="demo-simple-select-label"
           id="demo-simple-select"
           value={city}
           label="עיר"
-          onChange={handleCity}
+          onChange={handleChange}
         
         >
            
@@ -117,9 +118,10 @@ function Filters () {
         <Select
           labelId="demo-simple-select-label"
           id="demo-simple-select"
+          name= 'authorID'
           value={writer}
           label="סופר"
-          onChange={handleWriter}
+          onChange={handleChange}
         >
           
           {writers?.map(w => (
@@ -131,11 +133,12 @@ function Filters () {
       <FormControl sx={{ m: 1, minWidth: 120 }}>
         <InputLabel id="demo-simple-select-label">ספר</InputLabel>
         <Select
+        name='bookID'
           labelId="demo-simple-select-label"
           id="demo-simple-select"
           value={book}
           label="ספר"
-          onChange={handleBook}
+          onChange={handleChange}
         >
         
           {books?.map(b => (
@@ -147,11 +150,12 @@ function Filters () {
       <FormControl sx={{ m: 1, minWidth: 120 }}>
         <InputLabel id="demo-simple-select-label">קטגוריה</InputLabel>
         <Select
+          name='categoryID'
           labelId="demo-simple-select-label"
           id="demo-simple-select"
           value={category}
           label="קטגוריה"
-          onChange={handleCat}
+          onChange={handleChange}
         >
          
           {categories?.map(c => (
@@ -163,11 +167,12 @@ function Filters () {
       <FormControl sx={{ m: 1, minWidth: 120 }}>
         <InputLabel id="demo-simple-select-label">הוצאה לאור</InputLabel>
         <Select
+          name='publishingID'
           labelId="demo-simple-select-label"
           id="demo-simple-select"
           value={publishing}
           label="הוצאה לאור"
-          onChange={handlePub}
+          onChange={handleChange}
         >
         
           {publishings?.map(p => (
@@ -177,7 +182,7 @@ function Filters () {
         </Select>
       </FormControl>
         
-      <Button sx={{ m: 2.5, minWidth: 120 }} variant="contained" onClick={search}>חיפוש</Button>
+      <Button sx={{ m: 2.5, minWidth: 120 }} variant="contained" onClick={handleSubmit}>חיפוש</Button>
     </Box>
    
     </div>

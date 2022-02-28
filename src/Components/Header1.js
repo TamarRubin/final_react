@@ -3,8 +3,7 @@ import './Header.css'
 import Button from 'react-bootstrap/Button'
 import { Link } from 'react-router-dom'
 import { BrowserRouter, Redirect, useHistory } from 'react-router-dom'
-import SignIn from './signIn/SignIn'
-import SignUp from './signUp/signUp.component'
+
 const loggedInUser = localStorage.getItem('user')
 function Header () {
   const history = useHistory()
@@ -16,7 +15,7 @@ function Header () {
     history.push('signUp')
   }
   function getAddNewAd () {
- debugger
+
     if("user" in localStorage){
     history.push('AddNewAd')
    } else{

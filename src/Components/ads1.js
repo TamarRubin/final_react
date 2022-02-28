@@ -18,6 +18,8 @@ import { createTheme, ThemeProvider } from '@mui/material/styles';
 import axios from 'axios'
 
 import Ad from './Ad'
+import context from 'react-bootstrap/esm/AccordionContext';
+import Context from '@mui/base/TabsUnstyled/TabsContext';
 
 function Copyright() {
   return (
@@ -32,7 +34,6 @@ function Copyright() {
   );
 }
 
-const cards = [1, 2, 3, 4, 5, 6, 7, 8, 9];
 
 const theme = createTheme();
 
@@ -41,9 +42,10 @@ export default function Album() {
   useEffect(() => {
     let unmounted = false; 
     axios.get('http://localhost:5000/getAllOkAds').then(res => {
+      
      
       for (var i = 0; i < res.data.length; i++) {
-       debugger       
+       
         setAdsID(state =>[...state, res.data[i]])
         console.log(res.data[i].id);
       }
@@ -52,6 +54,21 @@ export default function Album() {
   
   }, [])
 
+//  useEffect(() => {
+//   debugger
+//     let unmounted = false; 
+//     axios.get(`http://localhost:5000/getAdsByCategory/${3}`).then(res => {
+     
+//       for (var i = 0; i < res.data.length; i++) {
+       
+//         setAdsID(state =>[...state, res.data[i]])
+        
+//         console.log(res.data[i].id);
+//       }
+//     })
+//     return () => { unmounted = true };
+  
+//   }, [])
   return (
     // <div style={{ backgroundColor: 'orange'}}>
     <div>

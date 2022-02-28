@@ -28,8 +28,6 @@ import MenuBookIcon from '@mui/icons-material/MenuBook';
 import axios from 'axios'
 
 //import { Link } from 'react-router-dom'
-
-import AddNewBook from './addNewBook'
 function Copyright(props) {
   return (
     
@@ -56,12 +54,12 @@ function AddPrice (props) {
   const status = props.match.params.status
   const [bookID, setBookID] = useState()
   useEffect(() => {
-    debugger
+    
     axios
       .get(`http://localhost:5000/getIdBookByNameNotOk/${bookName}`)
       .then(res => {
         console.log('res', res)
-        debugger
+        
         setBookID(res.data[0].id)
       })
   }, [])
@@ -69,7 +67,7 @@ function AddPrice (props) {
   const handleEvent = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
-    debugger
+   
     axios
       .post('http://localhost:5000/Addad', {
         adsiduser: UserId,

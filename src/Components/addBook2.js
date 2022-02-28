@@ -63,7 +63,7 @@ const theme = createTheme();
 
 function AddNewBook2 (props) {
   useEffect(() => {
-    debugger
+    
     axios
       .get('http://localhost:5000/getAllWriters')
       .then(res => {
@@ -111,7 +111,7 @@ function AddNewBook2 (props) {
       })
       .then(res => {
         console.log('res from add book', res)
-        debugger
+        
         history.push(`/addPrice/${name}/${0}`)
       })
   }
@@ -121,25 +121,25 @@ function AddNewBook2 (props) {
   
  
   
-    const [writer, setWriter] = useState('')
-  const [publishing, setPublishing] = useState('')
-  const [category, setCategory] = useState('')
+    const [writer, setWriter] = useState(9)
+  const [publishing, setPublishing] = useState(4)
+  const [category, setCategory] = useState(7)
 
   const [writers, setWriters] = useState([])
   const [publishings, setPublishings] = useState([])
   const [categories, setCategories] = useState([])
   const handleCat = (event) => {
-    debugger
+    
     setCategory(event.target.value);
   };
   
     const handleWriter = (event) => {
-      debugger
+      
       setWriter(event.target.value);
      // alert(city)
     };
     const handlePub = (event) => {
-      debugger
+     
       setPublishing(event.target.value);
      // alert(city)
     };
