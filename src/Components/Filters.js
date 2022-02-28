@@ -25,7 +25,7 @@ function Filters() {
       })
       .catch((err) => console.log(err));
 
-      axios.get("http://localhost:5000/getAllPublishings")
+    axios.get("http://localhost:5000/getAllPublishings")
       .then(res => {
         console.log(res.data);
         setPublishings(res.data);
@@ -62,43 +62,44 @@ function Filters() {
       .catch((err) => console.log(err))
 
   }
-  return <div>
-    <Form.Select aria-label="Default select example" name='cityID' onChange={handleChange}>
-      <option>בחר עיר</option>
-      {cities?.map(city => <option key={city?.name}>{city?.name}9</option>)}
-    </Form.Select>
+  return (
+    <div>
+      <Form.Select aria-label="Default select example" name='cityID' onChange={handleChange}>
+        <option>בחר עיר</option>
+        {cities?.map(city => <option key={city?.name}>{city?.name}9</option>)}
+      </Form.Select>
 
-    <Form.Select aria-label="Default select example" name='bookId' onChange={handleChange}>
-      <option>בחר ספר</option>
-      {books?.map(book => <option key={book?.name}>{book?.name}</option>)}
-    </Form.Select>
+      <Form.Select aria-label="Default select example" name='bookId' onChange={handleChange}>
+        <option>בחר ספר</option>
+        {books?.map(book => <option key={book?.name}>{book?.name}</option>)}
+      </Form.Select>
 
-    <Form.Select aria-label="Default select example" name='authorId' onChange={handleChange}>
-      <option>בחר סופר</option>
-      {writers?.map(writer => <option key={writer?.name}>{writer?.name}</option>)}
-    </Form.Select>
+      <Form.Select aria-label="Default select example" name='authorId' onChange={handleChange}>
+        <option>בחר סופר</option>
+        {writers?.map(writer => <option key={writer?.name}>{writer?.name}</option>)}
+      </Form.Select>
 
-    <Form.Select aria-label="Default select example" onChange={handleChange} name='publishingID' onChange={handleChange}>
-      <option>בחר הוצאה</option>
-      {publishings?.map(publishing => <option key={publishing?.name}>{publishing?.name}</option>)}
-    </Form.Select>
+      <Form.Select aria-label="Default select example" onChange={handleChange} name='publishingID' onChange={handleChange}>
+        <option>בחר הוצאה</option>
+        {publishings?.map(publishing => <option key={publishing?.name}>{publishing?.name}</option>)}
+      </Form.Select>
 
-    <Form.Select aria-label="Default select example" name='categoryId' onChange={handleChange}>
-      <option>בחר קטגוריה</option>
-      {categories?.map(category => <option key={category?.category}>{category?.category}</option>)}
-    </Form.Select>
+      <Form.Select aria-label="Default select example" name='categoryId' onChange={handleChange}>
+        <option>בחר קטגוריה</option>
+        {categories?.map(category => <option key={category?.category}>{category?.category}</option>)}
+      </Form.Select>
 
-    {/* 
+      {/* 
     <Form.Select aria-label="Default select example">
       <option>בחר אזור</option>
       <option value="1">One</option>
       <option value="2">Two</option>
       <option value="3">Three</option>
     </Form.Select> */}
-    <input type="button" onClick={handleSubmit} value="חיפוש" className="btn btn-dark btn-lg btn-block" />
+      <input type="button" onClick={handleSubmit} value="חיפוש" className="btn btn-dark btn-lg btn-block" />
 
-  </div>
-
+    </div>
+  )
 }
 
 
