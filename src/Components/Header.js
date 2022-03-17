@@ -17,7 +17,7 @@ import logo from '../images/logo2.png'
 import './Header.css'
 import { BrowserRouter, Redirect, useHistory } from 'react-router-dom'
 
-const pages = ['+פירסום מודעה חדשה' ];
+const pages = ['פירסום מודעה חדשה','הסר מודעה' ];
 
 
 const ResponsiveAppBar = () => {
@@ -41,6 +41,16 @@ const ResponsiveAppBar = () => {
       history.push('AddNewAd')
      } else{
       alert("משתמש לא רשום אינו יכול להוסיף מודעה")
+      history.push('signIn')
+     }
+  
+  };
+  const handleDeleteAds= () => {
+    setAnchorElNav(null);
+    if("user" in localStorage){
+      history.push('deleteAd')
+     } else{
+      alert("משתמש לא רשום אינו יכול להסיר מודעה")
       history.push('signIn')
      }
   
@@ -131,6 +141,13 @@ const ResponsiveAppBar = () => {
                 sx={{ my: 2, color: 'white', display: 'block', }}
               >
                 {pages[0]}
+              </Button>
+              <Button
+                key={pages[1]}
+                onClick={handleDeleteAds}
+                sx={{ my: 2, color: 'white', display: 'block', }}
+              >
+                {pages[1]}
               </Button>
               {/* <Button
                 key={pages[3]}

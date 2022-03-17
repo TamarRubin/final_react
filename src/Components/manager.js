@@ -76,22 +76,7 @@ const Manager = () => {
           ))}
         </Grid>
       </Container>
-     
-      {/* {adsID[0]?.id}
-      {adsID.map(ad => (
-        <div>
-          <p>{ad.bookID}</p>
-          <p>{ad.id}</p>
-          <p>{ad.price}</p>
-          <p>{ad.status}</p>
-          <p>{ad.userID}</p>
-        </div> */}
-        {/* // bookID: 3
-        // id: 3
-        // price: 25
-        // status: 0
-        // userID: 3 */}
-      {/* ))} */}
+    
     </div>
   )
 }

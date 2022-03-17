@@ -7,7 +7,7 @@ import Header from './Header';
 import Album from './ads1'
 import Filters from './Filters';
 
-function FirstPage() {
+function FirstPage(props) {
   useEffect(() => {
     
   }, []);
@@ -15,10 +15,10 @@ function FirstPage() {
  
   return <div>
     <center>
-    <Filters/>
+    <Filters onReload={props.onReload}/>
     </center>
     
-    <Album />
+    <Album forReload={props.forReload}/>
   </div>;
 }
 

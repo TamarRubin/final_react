@@ -12,7 +12,7 @@ import AddNewBook2 from './Components/addBook2'
 import AddPrice from './Components/addPrice'
 import SignInSide from './Components/signIn/LoginSide'
 import SignUpSide from './Components/signUp/signUp2'
-
+import DeleteAd from './Components/deleteAd'
 //import Budget from './Components/statistic'
 import VerticalLinearStepper from './Components/stepper'
 //import DropdownFilterCell from './Components/filters1';
@@ -20,8 +20,10 @@ import VerticalLinearStepper from './Components/stepper'
 //import Preferences from './Components/Preferences';
 function App () {
  useEffect(() => {
-  localStorage.clear()
+  localStorage.clear();
+  setForReload(forReload+1)
  }, []);
+ const [forReload, setForReload] = useState(0);
   return (
     <>
       <Router>
@@ -31,6 +33,7 @@ function App () {
         <Route path='/signIn'>
         <SignInSide></SignInSide>
           </Route>
+          
           <Route path='/Manager'>
             <Manager></Manager>
           </Route>
@@ -40,6 +43,9 @@ function App () {
           <Route path='/AddNewAd'>
             <AddNewAd></AddNewAd>
           </Route>
+          <Route path='/deleteAd'>
+            <DeleteAd></DeleteAd>
+          </Route>
           <Route path='/AddNewBook/:name'>
             <AddNewBook2></AddNewBook2>
           </Route>
@@ -48,15 +54,15 @@ function App () {
             <AddPrice />
           </Route>
           <Route path="/filters">
-           <Filters/>
+           <Filters onReload={()=>setForReload(forReload+1)}/>
           </Route>
       
           <Route exact path='/'>
-            <FirstPage></FirstPage>
+            <FirstPage forReload={forReload} onReload={()=>setForReload(forReload+1)}></FirstPage>
           </Route>
         </Switch>
       </Router>
-      
+      <div style={{color:'white'}}>aaaa{forReload}</div>
 
     </>
 

@@ -52,6 +52,7 @@ const showDitails = (event) => {
         </p> */}
       </Modal.Body>
       <Modal.Footer>
+        <h5>עיר : {props.ad.city_name} </h5>
         <h5 style={{color}}>{props.ad?.user_name}</h5>
         <h5 style={{color}}>{props.ad?.user_phone}</h5>
         <h5 style={{color}}>{props.ad?.user_mail}</h5>
